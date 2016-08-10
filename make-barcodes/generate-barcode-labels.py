@@ -10,6 +10,8 @@ import pyqrcode as qr
 import cv2
 import numpy as np
 import shutil
+import matplotlib
+matplotlib.use('Agg')
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 
@@ -73,13 +75,11 @@ def create_barcodes(file,delim):
             ix,iy,iz=np.shape(barcodepic1)
             cv2.putText(barcodepic1,str(row[1]),(25,ix-5),cv2.FONT_HERSHEY_SIMPLEX,0.4,(0,0,0))
             cv2.imwrite(barname,barcodepic1)
-
     return path
 
 def cat_barcodes(path,outname):
     path1=str(path)
     file1= os.listdir(path1)
-
     with PdfPages(str(outname)) as pdf:
         for x in file1:
             imgpath = str(path) + str(x)
